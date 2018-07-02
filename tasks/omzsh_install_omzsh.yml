@@ -1,0 +1,31 @@
+---
+
+- name: "Check if oh-my-zsh is already installedi and {{ omzsh_dest }} is present"
+  stat:
+    path: "{{ omzsh_dest }}"
+  register: omzsh_installed
+
+- name: " {{ omzsh_dest}} installed status"
+  debug:
+    var: omzsh_installed.stat
+  when: omzsh_debug  == True or  debug == True
+
+- name: Remove Repository Directory for Re-Install
+  file:
+    path: "{{ omzsh_dest }}"
+    state: absent
+  when: omzsh_installed.stat.exists == True
+  tags:
+    - omzsh:reinstall
+
+- name: Clone Repository in destination
+  git:
+    repo: "{{ omzsh_repo }}"
+    dest: "{{ omzsh_dest }}"
+  register: omzshclone
+  when: zshinstall|success and gitinstall|success and omzsh_installed.stat.exists == False
+
+- name: Set execute bit on oh-my-zsh.sh
+  file:
+    path: "{{ omzsh_dest }}/oh-my-zsh.sh"
+    mode: 0775

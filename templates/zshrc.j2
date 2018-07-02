@@ -1,0 +1,153 @@
+# If you come from bash you might have to change your $PATH.
+export PATH={% for path in omzsh_export_paths %}{{ path }}{%- if not loop.last %}:{% endif %}
+ {%- endfor %}
+
+# Path to your oh-my-zsh installation.
+export ZSH="{{ omzsh_dest }}"
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="{{ omzsh_theme }}"
+
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+{% if omzsh_do_random_theme == 'yes' %}
+ZSH_THEME_RANDON_CANDIDATES=( "robbyrussell" "agnoster" )
+{% else %}
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+{% endif %}
+
+# Uncomment the following line to use case-sensitive completion.
+{% if omzsh_do_case_sensitive == 'yes' %}
+CASE_SENSITIVE="true"
+{% else %}
+# CASE_SENSITIVE="true"
+{% endif %}
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+{% if omzsh_do_hyphen_insensitive == 'yes' %}
+HYPHEN_INSENSITIVE="true"
+{% else %}
+# HYPHEN_INSENSITIVE="true"
+{% endif %}
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+{% if omzsh_do_disable_auto_update == 'yes' %}
+DISABLE_AUTO_UPDATE="true"
+{% else %}
+# DISABLE_AUTO_UPDATE="true"
+{% endif %}
+
+# Uncomment the following line to change how often to auto-update (in days).
+{% if omzsh_do_disable_auto_update == 'yes' %}
+export UPDATE_ZSH_DAYS={{ omzsh_auto_update_days }}
+{% else %}
+# export UPDATE_ZSH_DAYS={{ omzsh_auto_update_days }}
+{% endif %}
+
+# Uncomment the following line to disable colors in ls.
+{% if omzsh_do_disable_ls_colors == 'yes' %}
+DISABLE_LS_COLORS="true"
+{% else %}
+# DISABLE_LS_COLORS="true"
+{% endif %}
+
+# Uncomment the following line to disable auto-setting terminal title.
+{% if omzsh_do_disable_auto_title == 'yes' %}
+DISABLE_AUTO_TITLE="true"
+{% else %}
+# DISABLE_AUTO_TITLE="true"
+{% endif %}
+
+# Uncomment the following line to enable command auto-correction.
+{% if omzsh_do_enable_correction == 'yes' %}
+ENABLE_CORRECTION="true"
+{% else %}
+# ENABLE_CORRECTION="true"
+{% endif %}
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+{% if omzsh_do_completion_waiting_dots == 'yes' %}
+COMPLETION_WAITING_DOTS="true"
+{% else %}
+# COMPLETION_WAITING_DOTS="true"
+{% endif %}
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+{% if omzsh_do_disable_untracked_files_dirty == 'yes' %}
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+{% else %}
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+{% endif %}
+
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+HIST_STAMPS="{{ omzsh_hist_stamps }}"
+
+# Would you like to use another custom folder than $ZSH/custom?
+{% if omzsh_do_zsh_custom == 'yes' %}
+ZSH_CUSTOM={{ omzsh_custom_path }}
+{% else %}
+# ZSH_CUSTOM={{ omzsh_custom_path }}
+{% endif %}
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  {% for plugin in omzsh_plugins_enabled %}{{ plugin }}{% if not loop.last %},
+  {% endif %}
+  {% endfor %}
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+{% if omzsh_source_custom_theme %}
+{% if omzsh_do_custom %}
+source "{{ omzsh_custom_path }}/{{ omzsh_theme }}.zsh-theme"
+{% else %}
+source "{{ omzzsh_dest }}/custom/themes/{{ omzsh_theme }}.zsh-theme"
+{% endif %}
+{% endif %}
+
+#Aliases
+{% for alias in omzsh_aliases %}
+    alias {{ alias.alias }}="{{ alias.command }}"
+{% endfor %}
+
+# GPG Agent init
+export GPG_TTY={{ omzsh_gpg_tty }}
+export EDITOR={{ omzsh_editor }}
+
+# Extra Templated Definitions (see jinja2 template and defaults/main.yml and vars/main.yml)
+{{ omzsh_zshrc_appends }}

@@ -1,0 +1,7 @@
+---
+
+- name: Set zsh as users shell
+  user:
+    name: "{{ item }}"
+    shell: "{{ omzsh_zsh_path }}"
+  with_items: "{{ omzsh_users }}"

@@ -1,0 +1,27 @@
+---
+
+- name: Ensure that ZSH is installed APT
+  apt:
+    name: zsh
+    state: present
+  register: zshinstall
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Ensure that ZSH is installed YUM
+  yum:
+    name: zsh
+    state: present
+  register: zshinstall
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Ensure that ZSH is installed Portage
+  portage:
+    package: zsh
+    state: present
+  register: zshinstall
+  when: ansible_distribution == 'Gentoo' or ansible_distribution == 'Sabayon'
+
+- name: Fail on unknown distribution
+  fail:
+    msg: "Unsupported OS type found"
+  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu' and ansible_distribution != 'CentOS' and ansible_distribution != 'Red Hat Enterprise Linux' and ansible_distribution != 'Gentoo' and ansible_distribution != 'Sabayon'

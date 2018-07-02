@@ -1,0 +1,53 @@
+---
+# tasks file for oh_my_zsh
+#
+
+- name: Import Ensure ZSH is installed
+  import_tasks: omzsh_ensure_zsh.yml
+  tags:
+    - provision
+    - omzsh:install
+    - omzsh:zsh
+
+- name: Import Ensure Git is present
+  import_tasks: omzsh_ensure_git.yml
+  tags:
+    - provision
+    - omzsh:install
+    - omzsh:git
+
+- name: Import backup existing zshrc
+  import_tasks: omzsh_backup_zshrc.yml
+  tags:
+    - omzsh:zshrc
+    - omzsh:zshrc:backup
+
+- name: Import Install Oh-My-Zsh
+  import_tasks: omzsh_install_omzsh.yml
+  tags:
+    - provision
+    - omzsh:install
+    - omzsh:omzsh
+  become: no
+
+- name: Import install Custom Theme
+  import_tasks: omzsh_install_custom_theme.yml
+  tags:
+    - provision
+    - omzsh:install
+    - omzsh:theme
+  when: "{{ omzsh_custom_theme }} == 'yes'"
+
+- name: Import install .zshrc
+  import_tasks: omzsh_install_zshrc.yml
+  tags:
+    - provision
+    - omzsh:install
+    - omzsh:zshrc
+
+- name: Import set user shell
+  import_tasks: omzsh_set_user_shell.yml
+  tags:
+    - provision
+    - omzsh:install
+    - omzsh:users

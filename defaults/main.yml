@@ -1,0 +1,55 @@
+---
+# defaults file for oh_my_zsh
+#
+
+omzsh_debug: False
+
+omzsh_zsh_path: "/usr/bin/zsh"
+
+omzsh_theme: "robbyrussell"
+omzsh_state: "latest"
+omzsh_repo: "https://github.com/robbyrussell/oh-my-zsh"
+omzsh_dest: "$HOME/.oh-my-zsh"
+omzsh_rc_path: "$HOME/.zshrc"
+omzsh_export_paths:  # List of paths
+
+
+omzsh_do_random_theme: 'no'
+omzsh_do_case_sensitive: 'no'
+omzsh_do_hyphen_insensitive: 'no'
+omzsh_do_disable_auto_update: 'no'
+omzsh_auto_update_days: 30
+omzsh_do_disable_ls_colors: 'no'
+omzsh_do_disable_auto_title: 'no'
+omzsh_do_enable_correction: 'no'
+omzsh_do_completion_waiting_dots: 'no'
+omzsh_do_disable_untracked_files_dirty: 'no'
+omzsh_hist_stamps: "mm/dd/yyyy"
+omzsh_do_zsh_custom: 'no'
+omzsh_custom_path: ""
+omzsh_plugins_enabled:   # List of plugins
+
+omzsh_source_custom_theme: false
+
+omzsh_aliases: # Array of aliases
+#  - alias: "example1"
+#    command: "/bin/sh example1"
+#  - alias: "example2"
+#    command: "ls -la"
+
+omzsh_custom_theme: no
+# Expecsts installer
+omzsh_custom_theme_url: "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh"
+
+
+# The following vars are not used to full effect yet.
+# This is part of a TODO.
+omzsh_users:  # List of users
+#  - ubuntu
+#
+
+omzsh_zshrc_appends: |
+    #This is where extra zshrc options can be appended such as exports.
+    #example:
+    #export EXAMPLE_VAR=example
+    #export EXAMPLE_PATH=/this/is/an/example

@@ -1,0 +1,7 @@
+---
+
+- name: Install ZSH Custom Theme
+  shell: "curl -o - {{ omzsh_custom_theme_url }} | zsh"
+  register: customtheme
+  ignore_errors: yes
+  become: no
