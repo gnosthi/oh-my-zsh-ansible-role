@@ -2,35 +2,3 @@
 # vars file for oh_my_zsh
 #
 
-omzsh_theme: "cloud"
-omzsh_export_paths:
-  - "$HOME/bin"
-  - "/usr/local/bin"
-  - "$PATH"
-omzsh_plugins_enabled:
-  - "git"
-  - "python"
-  - "ruby"
-  - "golang"
-  - "git-flow"
-omzsh_aliases:
-  - alias: "ll"
-    command: "ls -la"
-  - alias: "la"
-    command: "ls -la"
-
-omzsh_gpg_tty: "$(tty)"
-omzsh_editor: "/usr/local/bin/vim"
-
-omzsh_users:
-  - ubuntu
-
-omzsh_zshrc_appends: |
-  export YACKETY=yack
-  export DONT_TALK=back
-
-  if [[ '$YACKETY' = 'yack' ]]; then
-      echo "Yack"
-  else
-      echo "Smack"
-  fi
