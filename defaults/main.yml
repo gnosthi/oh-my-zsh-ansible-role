@@ -28,6 +28,8 @@ omzsh_hist_stamps: "mm/dd/yyyy"
 omzsh_do_zsh_custom: 'no'
 omzsh_custom_path: ""
 omzsh_plugins_enabled:   # List of plugins
+#  - example_plugin1
+#  - example_plugin2
 
 omzsh_source_custom_theme: false
 
@@ -38,15 +40,16 @@ omzsh_aliases: # Array of aliases
 #    command: "ls -la"
 
 omzsh_custom_theme: no
+
 # Expecsts installer
 omzsh_custom_theme_url: "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh"
 
 
 # The following vars are not used to full effect yet.
 # This is part of a TODO.
-omzsh_users:  # List of users
-#  - ubuntu
-#
+omzsh_users:  # List of users (This is currently used to set the shell of the user)
+#  - example_user
+
 
 omzsh_zshrc_appends: |
     #This is where extra zshrc options can be appended such as exports.

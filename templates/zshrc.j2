@@ -145,9 +145,5 @@ source "{{ omzzsh_dest }}/custom/themes/{{ omzsh_theme }}.zsh-theme"
     alias {{ alias.alias }}="{{ alias.command }}"
 {% endfor %}
 
-# GPG Agent init
-export GPG_TTY={{ omzsh_gpg_tty }}
-export EDITOR={{ omzsh_editor }}
-
 # Extra Templated Definitions (see jinja2 template and defaults/main.yml and vars/main.yml)
 {{ omzsh_zshrc_appends }}
